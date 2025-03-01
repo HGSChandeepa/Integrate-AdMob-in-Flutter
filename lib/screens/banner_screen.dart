@@ -1,15 +1,16 @@
+import 'package:admob/widgets/banner_widget.dart';
 import 'package:flutter/material.dart';
-import '../ads/banner_ad_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+class BannerScreen extends StatelessWidget {
+  const BannerScreen({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text("Flutter AdMob Ads")),
       body: Column(
         children: [
-          // Top Banner Ad
-          BannerAdWidget(isTopAd: true),
+          BannerAdWidget(isTopAd: true), // Top Banner
 
           Expanded(
             child: Center(
@@ -20,8 +21,7 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
 
-          // Bottom Banner Ad
-          BannerAdWidget(isTopAd: false),
+          BannerAdWidget(isTopAd: false), // Bottom Banner
         ],
       ),
     );

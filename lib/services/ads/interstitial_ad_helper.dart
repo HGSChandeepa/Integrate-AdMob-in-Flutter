@@ -1,4 +1,5 @@
-import 'package:admob/ads/ad_helper.dart';
+import 'package:admob/services/ads/ad_id_config.dart';
+import 'package:flutter/foundation.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class InterstitialAdHelper {
@@ -18,7 +19,9 @@ class InterstitialAdHelper {
       request: AdRequest(),
       adLoadCallback: InterstitialAdLoadCallback(
         onAdLoaded: (ad) {
-          print('Interstitial ad loaded successfully');
+          if (kDebugMode) {
+            print('Interstitial ad loaded successfully');
+          }
           _isAdLoading = false;
           ad.fullScreenContentCallback = FullScreenContentCallback(
             onAdDismissedFullScreenContent: (ad) {
@@ -28,7 +31,9 @@ class InterstitialAdHelper {
               loadInterstitialAd();
             },
             onAdFailedToShowFullScreenContent: (ad, error) {
-              print('Failed to show ad: ${error.message}');
+              if (kDebugMode) {
+                print('Failed to show ad: ${error.message}');
+              }
               ad.dispose();
               loadInterstitialAd();
             },
@@ -36,7 +41,9 @@ class InterstitialAdHelper {
           _interstitialAd = ad;
         },
         onAdFailedToLoad: (err) {
-          print('Failed to load interstitial ad: ${err.message}');
+          if (kDebugMode) {
+            print('Failed to load interstitial ad: ${err.message}');
+          }
           _isAdLoading = false;
           _interstitialAd = null;
         },
@@ -47,7 +54,9 @@ class InterstitialAdHelper {
   // Show Interstitial Ad
   void showAd() {
     if (_interstitialAd == null) {
-      print('Warning: Attempt to show ad before loading');
+      if (kDebugMode) {
+        print('Warning: Attempt to show ad before loading');
+      }
       onAdDismissed();
       return;
     }
